@@ -36,21 +36,21 @@ Note that the answer must be a substring, `pwke` is a subsequence and not a subs
 Build Requirements
 ------------------
 ```
-# Build Requirements here
+Have go installed
 ```
 
 
 How to build
 ------------
 ```
-# instructions here
+go build first-challenge.go
 ```
 
 
 How to Run
 ----------
 ```
-# instructions here
+./first-challenge
 ```
 
 
