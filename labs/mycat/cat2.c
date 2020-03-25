@@ -10,12 +10,9 @@
 void filecopy(int fd)
 {
     if(fd == 0){
-        int size = 100;
-        char buffer[size+1];
-        while(read(fd,buffer,size)>0){
-            buffer[size] = '\0';
-            printf("%s", buffer);
-            memset(buffer,0,size);
+        char *data;
+        while(read(fd,&data,1)!='\0'){
+            write(1,data,1);
         }
         return;
     }
