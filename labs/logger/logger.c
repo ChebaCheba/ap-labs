@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
+#include <signal.h>
 #include "logger.h"
+
 
 
 int infof(const char *format, ...) {
@@ -36,10 +38,11 @@ int errorf(const char *format, ...) {
 int panicf(const char *format, ...) {
     va_list text;
     va_start(text, format);
-    textcolor(BRIGHT, RED, WHITE);
+    textcolor(BRIGHT, RED, BLACK);
     int ok = vfprintf(stdout, format, text);
     textcolor(RESET, WHITE, BLACK);
     va_end(text);
+    raise (SIGABRT);
     return ok;
 }
 

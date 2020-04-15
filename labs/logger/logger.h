@@ -22,3 +22,4 @@ int errorf(const char *format, ...);
 int panicf(const char *format, ...);
 void textcolor(int attr, int fg, int bg);
 
+
