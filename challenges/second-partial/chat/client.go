@@ -7,22 +7,37 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"net"
 	"os"
+	"flag"
 )
 
 //!+
 func main() {
-	conn, err := net.Dial("tcp", "localhost:8000")
+
+	var username = flag.String("user","","name of user")
+	var server = flag.String("server","localhost:8000","server to connect to")
+	flag.Parse()
+
+	if *username == "" {
+		log.Fatal("Plase register a username.\n")
+		os.Exit(-1)
+	} 
+
+	conn, err := net.Dial("tcp", *server)
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println("irc-server > Welcome to the Simple IRC Server")
+	fmt.Fprintf(conn, *username+"\n")
+
 	done := make(chan struct{})
 	go func() {
 		io.Copy(os.Stdout, conn) // NOTE: ignoring errors
-		log.Println("done")
+		log.Println("You left the server")
 		done <- struct{}{} // signal the main goroutine
 	}()
 	mustCopy(conn, os.Stdin)
@@ -37,3 +52,4 @@ func mustCopy(dst io.Writer, src io.Reader) {
 		log.Fatal(err)
 	}
 }
+
