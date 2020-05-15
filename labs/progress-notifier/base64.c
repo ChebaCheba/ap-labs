@@ -18,7 +18,6 @@
 #define EQUALS     65
 #define INVALID    66
 
-#define SIGINFO 29
 #define ENCODED_SIZE 60000000
 #define ENCODED_NAME "encoded.txt"
 #define DECODED_NAME "decoded.txt"
@@ -149,7 +148,7 @@ void signalHandler(int sig){
 int main(int argc, char *argv[]){
 
     signal(SIGINT, signalHandler);
-    signal(SIGINFO, signalHandler);
+    signal(SIGUSR1, signalHandler);
 
     int fd = open(argv[2], O_RDONLY);
     fs = lseek(fd,(size_t)0,SEEK_END);
